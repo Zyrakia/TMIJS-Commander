@@ -1,4 +1,4 @@
-A super simple library to easily implement commands into a TMIJS client. I wanted to turn this into an NPM module, but I don't think it's useful enough for that. This sort of manager and executor model can be applied to any text based command service really, it is used in SpigotMC for minecraft and I have also implemented this into a Discord bot with minor changes
+A super simple library to easily implement commands into a TMIJS client. I wanted to turn this into an NPM module, but I don't think it's useful enough for that. This sort of manager and executor model can be applied to any text based command service really, it is used in SpigotMC for Minecraft and I have also implemented this into a Discord bot with minor changes
 ## Contents
 This library has three files, that default export it's contents.
 
