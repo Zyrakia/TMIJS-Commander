@@ -2,8 +2,8 @@
 This library has three files, that default export it's contents.
 
 1. CommandManager.ts - The class used to manage commands for a TMIJS client.
-2. CommandExecutor.ts - Any class that handles a command will extend this interface.
-3. CommandOrigins.ts - An interface containing command origins. This is sent to the CommandExecutor `invoke()` method
+2. CommandExecutor.ts - The interface that any class that handles a command will implement.
+3. CommandOrigins.ts - The interface containing command origins. This is sent to the CommandExecutor `invoke()` method
 
 You can take the code out of these files and implement them into your own project so they will work in your situation, modify them however you want. I am deciding to place these files into a public repository because it took me a while to find a command system I liked, and I thought maybe some people have the same issue.
 
