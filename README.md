@@ -18,7 +18,7 @@ client.connect().then(() => {
     console.log("Client is ready.");
 });
 ```
-This would start the client, `options` being your own TMIJS client options, and register the command `!coaching` to the executor `DebugCommand`.
+This would start the client, `options` being your own TMIJS client options, and register the command `!debug` to the executor `DebugCommand`.
 ##### DebugCommand.ts:
 ```javascript
 export default class DebugCommand implements CommandExecutor {
