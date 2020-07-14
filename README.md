@@ -1,4 +1,4 @@
-This is an incredibly simple library to easily implement commands into a TMIJS client.
+A super simple library to easily implement commands into a TMIJS client.
 ## Contents
 This library has three files, that default export it's contents.
 
