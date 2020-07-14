@@ -1,4 +1,5 @@
 A super simple library to easily implement commands into a TMIJS client.
+I wanted to turn this into an NPM module, but I don't think it's useful enough for that.
 ## Contents
 This library has three files, that default export it's contents.
 
