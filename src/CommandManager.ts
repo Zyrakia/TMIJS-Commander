@@ -1,6 +1,6 @@
 import { Client, Userstate } from 'tmi.js';
-import { CommandExecutor } from './CommandExecutor';
-import { CommandOrigins } from './CommandOrigins';
+import { CommandExecutor } from './utils/CommandExecutor';
+import { CommandOrigins } from './utils/CommandOrigins';
 
 class CommandManager {
 	private registeredCommands: Map<string, CommandExecutor> = new Map();
