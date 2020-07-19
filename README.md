@@ -8,9 +8,9 @@ This is an example to register the command `!debug` to the CommandExecutor `Debu
 
 ```javascript
 const client = tmi.client(options);
-const commandManager = new CommandManager(client);
+const commander = new Commander(client);
 client.connect().then(() => {
-	commandManager.registerCommand('!debug', new DebugCommand());
+	commander.registerCommand('!debug', new DebugCommand());
 	console.log('Client is ready.');
 });
 ```
