@@ -1,13 +1,4 @@
 A super simple library to easily implement commands into a TMIJS client. I wanted to turn this into an NPM module, but I don't think it's useful enough for that. This sort of manager and executor model can be applied to any text based command service really, it is used in SpigotMC for Minecraft and I have also implemented this into a Discord bot with minor changes
-## Contents
-This library has three files, that default export it's contents.
-
-1. CommandManager.ts - The class used to manage commands for a TMIJS client.
-2. CommandExecutor.ts - The interface that any class that handles a command will implement.
-3. CommandOrigins.ts - The interface containing command origins. This is sent to the CommandExecutor `invoke()` method
-
-You can take the code out of these files and implement them into your own project so they will work in your situation, modify them however you want. I am deciding to place these files into a public repository because it took me a while to find a command system I liked, and I thought maybe some people have the same issue.
-
 ## Guide
 This is an example to register the command `!debug` to the CommandExecutor `DebugCommand`.
 ##### index.ts:
