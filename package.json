@@ -1,0 +1,33 @@
+{
+	"name": "tmijs-command-manager",
+	"version": "1.0.0",
+	"description": "A super simple library to easily implement commands into a TMIJS client.",
+	"types": "lib/CommandManager.d.ts",
+	"main": "lib/CommandManager",
+	"scripts": {
+		"build": "tsc"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Zyrakia/TMIJS-Command-Manager.git"
+	},
+	"keywords": [],
+	"author": "Zyrakia <mailzyrakia@gmail.com> (https://zyrakia.github.io/)",
+	"license": "MIT",
+	"files": [
+		"lib"
+	],
+	"bugs": {
+		"url": "https://github.com/Zyrakia/TMIJS-Command-Manager/issues"
+	},
+	"homepage": "https://github.com/Zyrakia/TMIJS-Command-Manager#readme",
+	"devDependencies": {
+		"typescript": "^3.9.7"
+	},
+	"dependencies": {
+		"@types/tmi.js": "^1.4.0"
+	},
+	"peerDependencies": {
+		"tmi.js": "*"
+	}
+}
