@@ -6,13 +6,13 @@
 
 ### **NPM**
 
-```
+```bash
 $ npm i tmijs-commander --save
 ```
 
 ### **YARN**
 
-```
+```bash
 $ yarn add tmijs-commander
 ```
 
@@ -22,7 +22,7 @@ This guide will show you how to register the `!debug` command the command execut
 
 ## **Initializing a commander**
 
-Import neccesary modules
+Import necessary modules
 
 ```javascript
 import { Commander, CommandExecutor, CommandOrigins } from 'tmijs-commander';
@@ -45,7 +45,7 @@ client.connect().then(() => {
 
 ## **Creating the executor**
 
-As you saw above, we registered the `!debug` command to an instance of the the executor `DebugCommand`, but now we must create that executor. An executor can either be an anoymous function, or in this case a class that extends `CommandExecutor`.
+As you saw above, we registered the `!debug` command to an instance of the the executor `DebugCommand`, but now we must create that executor. An executor can either be an anonymous function, or in this case a class that extends `CommandExecutor`.
 
 A command executor class will have a single required function by the name of `invoke`, this function will be called when the linked command is executed.
 
