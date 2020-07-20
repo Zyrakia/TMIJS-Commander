@@ -17,7 +17,7 @@ class Commander {
 		this.id = Commander.runningID++;
 
 		this.client.addListener('chat', (channel, userstate, message, self) => {
-			this.parseChatEventToRegisteredCommand(channel, userstate, message, self, this.client);
+			this.parseChatEventToCommand(channel, userstate, message, self, this.client);
 		});
 
 		info(
@@ -41,7 +41,7 @@ class Commander {
 		info(`Registered command ${command}.`, this.id, this.shouldLog);
 	}
 
-	private parseChatEventToRegisteredCommand(
+	private parseChatEventToCommand(
 		channel: string,
 		userstate: Userstate,
 		message: string,
@@ -52,7 +52,7 @@ class Commander {
 
 		const messageArr = message.split(' ');
 		const command = messageArr.shift();
-		const args = [...messageArr];
+		const args = messageArr;
 		if (!command || !args) return;
 
 		const origins: CommandOrigins = {
@@ -90,8 +90,12 @@ class Commander {
 		return this.registeredCommands;
 	}
 
-	public getRegisteredCommandsAsArray() {
+	public getRegisteredIdentifiers() {
 		return [...this.registeredCommands.keys()];
+	}
+
+	public getRegisteredExecutors() {
+		return [...this.registeredCommands.values()];
 	}
 
 	public getClient() {
