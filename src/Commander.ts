@@ -1,6 +1,7 @@
 import { Client, Userstate } from 'tmi.js';
 import { CommandExecutor } from './utils/CommandExecutor';
 import { CommandOrigins } from './utils/CommandOrigins';
+import { info, warn } from './utils/Logger';
 
 class Commander {
 	private static runningID = 0;
@@ -18,17 +19,25 @@ class Commander {
 		this.shouldLog = enableLogging;
 		this.id = Commander.runningID++;
 
-		this.log('Commander initialized. (ID: ' + this.id + ' | Logging: ' + this.shouldLog + ')');
+		info(
+			'Commander initialized. (ID: ' + this.id + ' | Logging: ' + this.shouldLog + ')',
+			this.id,
+			this.shouldLog
+		);
 	}
 
 	public registerCommand(command: string, executor: CommandExecutor) {
 		if (!command || command.includes(' ')) {
-			this.log(`Command was not registered. It is either empty or includes spaces.`);
+			warn(
+				`Command was not registered. It is either empty or includes spaces.`,
+				this.id,
+				this.shouldLog
+			);
 			return;
 		}
 
 		this.registeredCommands.set(command.toLowerCase(), executor);
-		this.log(`Registered command ${command}.`);
+		info(`Registered command ${command}.`, this.id, this.shouldLog);
 	}
 
 	private parseChatEventToRegisteredCommand(
@@ -60,17 +69,18 @@ class Commander {
 		const command = this.registeredCommands.get(origins.command);
 		if (!command) return;
 		command.invoke(origins);
-		this.log(`Command ${origins.command} run by ${origins.user.username}.`);
+
+		info(
+			`Command ${origins.command} run by ${origins.user.username}.`,
+			this.id,
+			this.shouldLog
+		);
 	}
 
 	public toggleLog() {
 		this.shouldLog = !this.shouldLog;
 		if (this.shouldLog) console.log('Commander logging enabled');
 		else console.log('Commander logging disabled');
-	}
-
-	private log(msg: string) {
-		if (this.shouldLog) console.log(this.id + ': ' + msg);
 	}
 
 	public getRegisteredCommands() {

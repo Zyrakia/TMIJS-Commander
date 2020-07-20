@@ -1,12 +1,11 @@
 {
 	"name": "tmijs-commander",
-	"version": "1.0.5",
+	"version": "1.1.0",
 	"description": "A super simple library to easily implement commands into a TMIJS client.",
 	"types": "lib/Commander.d.ts",
 	"main": "lib/Commander",
 	"scripts": {
-		"build": "del /S /Q \"./lib/\" && tsc",
-		"release": "npm run build && npm publish"
+		"build": "del /S /Q \"./lib/\" && tsc && npm publish"
 	},
 	"repository": {
 		"type": "git",
