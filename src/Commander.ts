@@ -1,23 +1,23 @@
 import { Client, Userstate } from 'tmi.js';
-import { CommandExecutor } from './utils/CommandExecutor';
+import { CommandExecutor, AnonymousCommandExecutor } from './utils/CommandExecutor';
 import { CommandOrigins } from './utils/CommandOrigins';
 import { info, warn } from './utils/Logger';
 
 class Commander {
 	private static runningID = 0;
 
-	private registeredCommands: Map<string, CommandExecutor> = new Map();
+	private registeredCommands: Map<string, CommandExecutor | AnonymousCommandExecutor> = new Map();
 	private client: Client;
-	private shouldLog: boolean;
 	private id: number;
+	private shouldLog: boolean;
 
 	constructor(client: Client, enableLogging: boolean = false) {
 		this.client = client;
 		this.client.addListener('chat', (channel, userstate, message, self) => {
 			this.parseChatEventToRegisteredCommand(channel, userstate, message, self, this.client);
 		});
-		this.shouldLog = enableLogging;
 		this.id = Commander.runningID++;
+		this.shouldLog = enableLogging;
 
 		info(
 			'Commander initialized. (ID: ' + this.id + ' | Logging: ' + this.shouldLog + ')',
@@ -26,7 +26,7 @@ class Commander {
 		);
 	}
 
-	public registerCommand(command: string, executor: CommandExecutor) {
+	public registerCommand(command: string, executor: CommandExecutor | AnonymousCommandExecutor) {
 		if (!command || command.includes(' ')) {
 			warn(
 				`Command was not registered. It is either empty or includes spaces.`,
@@ -68,7 +68,9 @@ class Commander {
 	private runCommand(origins: CommandOrigins) {
 		const command = this.registeredCommands.get(origins.command);
 		if (!command) return;
-		command.invoke(origins);
+
+		if (command instanceof CommandExecutor) command.invoke(origins);
+		else command(origins);
 
 		info(
 			`Command ${origins.command} run by ${origins.user.username}.`,
@@ -97,6 +99,10 @@ class Commander {
 
 	public getID() {
 		return this.id;
+	}
+
+	public getShouldLog() {
+		return this.shouldLog;
 	}
 }
 

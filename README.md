@@ -20,7 +20,7 @@ This would start the client, `options` being your own TMIJS client options, and 
 ##### DebugCommand.ts:
 
 ```javascript
-export default class DebugCommand implements CommandExecutor {
+export default class DebugCommand extends CommandExecutor {
     public invoke(origin: CommandOrigins) {
         origin.client.ping().then((ping) => {
             origin.client.say(origin.channel, `Latency: ${ping[0] * 1000}ms`);
