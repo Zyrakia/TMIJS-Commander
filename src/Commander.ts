@@ -8,16 +8,17 @@ class Commander {
 
 	private registeredCommands: Map<string, CommandExecutor | AnonymousCommandExecutor> = new Map();
 	private client: Client;
-	private id: number;
 	private shouldLog: boolean;
+	private id: number;
 
 	constructor(client: Client, enableLogging: boolean = false) {
 		this.client = client;
+		this.shouldLog = enableLogging;
+		this.id = Commander.runningID++;
+
 		this.client.addListener('chat', (channel, userstate, message, self) => {
 			this.parseChatEventToRegisteredCommand(channel, userstate, message, self, this.client);
 		});
-		this.id = Commander.runningID++;
-		this.shouldLog = enableLogging;
 
 		info(
 			'Commander initialized. (ID: ' + this.id + ' | Logging: ' + this.shouldLog + ')',
