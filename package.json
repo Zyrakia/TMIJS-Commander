@@ -3,8 +3,8 @@
 	"version": "1.1.4",
 	"description": "A simple library to easily implement commands into a TMIJS client.",
 	"author": "Zyrakia <mailzyrakia@gmail.com> (https://zyrakia.github.io/)",
-	"main": "lib/Commander",
-	"types": "lib/Commander.d.ts",
+	"main": "lib/index",
+	"types": "lib/index.d.ts",
 	"license": "MIT",
 	"scripts": {
 		"build": "del /S /Q \"./lib/\" && tsc && npm publish"

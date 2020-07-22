@@ -1,4 +1,4 @@
-import { CommandOrigins } from './CommandOrigins';
+import { CommandOrigins } from '..';
 
 export abstract class CommandExecutor {
 	abstract invoke(origins: CommandOrigins): void;

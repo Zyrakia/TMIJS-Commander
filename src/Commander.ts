@@ -1,114 +1,47 @@
 import { Client, Userstate } from 'tmi.js';
-import { CommandExecutor, AnonymousCommandExecutor } from './utils/CommandExecutor';
-import { CommandOrigins } from './utils/CommandOrigins';
-import { info, warn } from './utils/Logger';
+import { CommandExecutor, AnonymousCommandExecutor } from '.';
+import { parseOrigins } from './utils/CommandOrigins';
+import Command from './Command';
 
-class Commander {
+export default class Commander {
+	private static registeredCommanders: Commander[] = [];
 	private static runningID = 0;
 
-	private registeredCommands: Map<string, CommandExecutor | AnonymousCommandExecutor> = new Map();
-	private client: Client;
-	private shouldLog: boolean;
 	private id: number;
+	private registeredCommands: Map<string, Command> = new Map();
 
-	constructor(client: Client, enableLogging: boolean = false) {
-		this.client = client;
-		this.shouldLog = enableLogging;
+	constructor(private client: Client) {
 		this.id = Commander.runningID++;
-
-		this.client.addListener('chat', (channel, userstate, message, self) => {
-			this.parseChatEventToCommand(channel, userstate, message, self, this.client);
-		});
-
-		info(
-			'Commander initialized. (ID: ' + this.id + ' | Logging: ' + this.shouldLog + ')',
-			this.id,
-			this.shouldLog
-		);
+		this.client.addListener('chat', this.handleChat);
+		Commander.registeredCommanders.push(this);
 	}
 
-	public registerCommand(command: string, executor: CommandExecutor | AnonymousCommandExecutor) {
-		if (!command || command.includes(' ')) {
-			warn(
-				`Command was not registered. It is either empty or includes spaces.`,
-				this.id,
-				this.shouldLog
-			);
-			return;
-		}
-
-		this.registeredCommands.set(command.toLowerCase(), executor);
-		info(`Registered command ${command}.`, this.id, this.shouldLog);
-	}
-
-	private parseChatEventToCommand(
+	private handleChat(
+		this: Commander,
 		channel: string,
 		userstate: Userstate,
 		message: string,
-		self: boolean,
-		client: Client
+		self: boolean
 	) {
 		if (self) return;
+		const origins = parseOrigins(channel, userstate, message, this.client);
+		if (!origins) return;
 
-		const messageArr = message.split(' ');
-		const command = messageArr.shift();
-		const args = messageArr;
-		if (!command || !args) return;
-
-		const origins: CommandOrigins = {
-			command: command.toLowerCase(),
-			arguments: args,
-			channel: channel,
-			user: userstate,
-			client: client,
-		};
-
-		this.runCommand(origins);
-	}
-
-	private runCommand(origins: CommandOrigins) {
-		const command = this.registeredCommands.get(origins.command);
+		const command = this.registeredCommands.get(origins.identifier);
 		if (!command) return;
-
-		if (command instanceof CommandExecutor) command.invoke(origins);
-		else command(origins);
-
-		info(
-			`Command ${origins.command} run by ${origins.user.username}.`,
-			this.id,
-			this.shouldLog
-		);
+		command.run(origins);
 	}
 
-	public toggleLog() {
-		this.shouldLog = !this.shouldLog;
-		if (this.shouldLog) console.log('Commander logging enabled');
-		else console.log('Commander logging disabled');
+	public registerCommand(
+		command: string,
+		executor: CommandExecutor | AnonymousCommandExecutor,
+		allowedChannels: string[] = []
+	) {
+		if (!command || command.includes(' ')) return;
+		this.registeredCommands.set(command, new Command(executor, allowedChannels));
 	}
 
-	public getRegisteredCommands() {
-		return this.registeredCommands;
-	}
-
-	public getRegisteredIdentifiers() {
-		return [...this.registeredCommands.keys()];
-	}
-
-	public getRegisteredExecutors() {
-		return [...this.registeredCommands.values()];
-	}
-
-	public getClient() {
-		return this.client;
-	}
-
-	public getID() {
+	private getID() {
 		return this.id;
 	}
-
-	public getShouldLog() {
-		return this.shouldLog;
-	}
 }
-
-export { Commander, CommandExecutor, CommandOrigins };
