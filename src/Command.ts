@@ -8,8 +8,6 @@ export default class Command {
 	) {}
 
 	public run(origins: CommandOrigins) {
-		console.log(this.allowedChannels);
-		console.log(origins.channel);
 		if (this.allowedChannels.length !== 0)
 			if (!this.allowedChannels.includes(origins.channel)) return;
 		if (this.executor instanceof CommandExecutor) this.executor.invoke(origins);
