@@ -24,9 +24,8 @@ export function parseOrigins(
 
 	const messageArr = message.split(' ');
 	const identifier = messageArr.shift();
+	if (!identifier) return;
 	const args = messageArr;
-
-	if (messageArr.length === 0 || !identifier) return;
 
 	parsed.identifier = identifier.toLowerCase();
 	parsed.arguments = args;

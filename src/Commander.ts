@@ -12,22 +12,23 @@ export default class Commander {
 
 	constructor(private client: Client) {
 		this.id = Commander.runningID++;
-		this.client.addListener('chat', this.handleChat);
+		this.client.addListener('chat', (channel, userstate, message, self) => {
+			this.handleChat(channel, userstate, message, self, this);
+		});
 		Commander.registeredCommanders.push(this);
 	}
 
 	private handleChat(
-		this: Commander,
 		channel: string,
 		userstate: Userstate,
 		message: string,
-		self: boolean
+		self: boolean,
+		commander: Commander
 	) {
 		if (self) return;
-		const origins = parseOrigins(channel, userstate, message, this.client);
+		const origins = parseOrigins(channel, userstate, message, commander.client);
 		if (!origins) return;
-
-		const command = this.registeredCommands.get(origins.identifier);
+		const command = commander.registeredCommands.get(origins.identifier);
 		if (!command) return;
 		command.run(origins);
 	}
@@ -41,7 +42,15 @@ export default class Commander {
 		this.registeredCommands.set(command, new Command(executor, allowedChannels));
 	}
 
-	private getID() {
+	public getID() {
 		return this.id;
+	}
+
+	public getRegisteredCommands() {
+		return [...this.registeredCommands.keys()];
+	}
+
+	public static getRegisteredCommanders() {
+		return this.registeredCommanders;
 	}
 }
