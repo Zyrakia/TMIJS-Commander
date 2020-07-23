@@ -10,7 +10,7 @@ export class Command {
 	) {}
 
 	public run(origins: CommandOrigins) {
-		if (this.enabled) return;
+		if (!this.enabled) return;
 		if (this.allowedChannels.length !== 0)
 			if (!this.allowedChannels.includes(origins.channel)) return;
 

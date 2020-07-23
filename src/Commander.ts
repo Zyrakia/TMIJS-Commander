@@ -28,7 +28,7 @@ export class Commander {
 		if (self) return;
 		const origins = parseOrigins(channel, userstate, message, commander.client);
 		if (!origins) return;
-		const command = commander.registeredCommands.get(origins.identifier);
+		const command = commander.getCommand(origins.identifier);
 		if (!command) return;
 		command.run(origins);
 	}
