@@ -2,7 +2,7 @@
 
 Below are the different components of the library, with their available methods or code.
 
-These modules include:
+These components include:
 
 -   [Commander](#commander-class)
 -   [Command](#command-class)
