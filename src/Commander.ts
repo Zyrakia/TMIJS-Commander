@@ -1,11 +1,11 @@
 import { Client, Userstate } from 'tmi.js';
 import { CommandExecutor, AnonymousCommandExecutor } from '.';
 import { parseOrigins } from './utils/CommandOrigins';
-import Command from './Command';
+import { Command } from './Command';
 
-export default class Commander {
-	private static registeredCommanders: Commander[] = [];
+export class Commander {
 	private static runningID = 0;
+	private static registeredCommanders: Map<number, Commander> = new Map();
 
 	private id: number;
 	private registeredCommands: Map<string, Command> = new Map();
@@ -15,7 +15,7 @@ export default class Commander {
 		this.client.addListener('chat', (channel, userstate, message, self) => {
 			this.handleChat(channel, userstate, message, self, this);
 		});
-		Commander.registeredCommanders.push(this);
+		Commander.registeredCommanders.set(this.id, this);
 	}
 
 	private handleChat(
@@ -46,11 +46,19 @@ export default class Commander {
 		return this.id;
 	}
 
-	public getRegisteredCommands() {
-		return [...this.registeredCommands.keys()];
+	public getCommand(command: string) {
+		return this.registeredCommands.get(command.toLowerCase());
 	}
 
-	public static getRegisteredCommanders() {
+	public getCommands() {
+		return this.registeredCommands;
+	}
+
+	public static getCommander(id: number) {
+		return this.registeredCommanders.get(id);
+	}
+
+	public static getCommanders() {
 		return this.registeredCommanders;
 	}
 }

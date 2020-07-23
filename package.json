@@ -7,7 +7,7 @@
 	"types": "lib/index.d.ts",
 	"license": "MIT",
 	"scripts": {
-		"compile": "del /S /Q \"./lib/\" && tsc",
+		"compile": "npm install && del /S /Q \"./lib/\" && tsc",
 		"link": "npm run compile && npm link",
 		"build": "npm run compile && npm publish"
 	},
