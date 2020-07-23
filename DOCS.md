@@ -4,22 +4,22 @@ Below are the different components of the library, with their available methods 
 
 These modules include:
 
--   [Commander](<#Commander-(Class)>)
--   [Command](<#Command-(Class)>)
--   [CommandOrigins](<#CommandOrigins-(Interface)>)
--   [CommandExecutor](<#CommandExecutor-(Abstract-Class)>)
--   [AnonymousCommandExecutor](<#AnonymousCommandExecutor-(Function-Interface)>)
+-   [Commander](#commander-class)
+-   [Command](#command-class)
+-   [CommandOrigins](#commandorigins-interface)
+-   [CommandExecutor](#commandexecutor-abstract-class)
+-   [AnonymousCommandExecutor](#anonymouscommandexecutor-function-interface)
 
 # Commander (Class)
 
 **Contents**
 
--   [registerCommand](<#registerCommand():-void>) - Register a new command
--   [getID](<#getID():-number>) - Get the Commander's ID
--   [getCommand](<#getCommand():-Command>) - Get a specific command by identifier
--   [getCommands](<#getCommands():-Map<string,-Command>) - Get all registered commands
--   [getCommander](<#getCommander():-Commander>) - Get a specific commander by ID
--   [getCommanders](<#getCommanders():-Map<number,-Commander>) - Get all registered commanders
+-   [registerCommand](#registercommand-void) - Register a new command
+-   [getID](#getid-number) - Get the Commander's ID
+-   [getCommand](#getcommand-command) - Get a specific command by identifier
+-   [getCommands](#getcommands-mapstring-command) - Get all registered commands
+-   [getCommander](#getcommander-commander) - Get a specific commander by ID
+-   [getCommanders](#getcommanders-mapnumber-commander) - Get all registered commanders
 
 ## Constructor
 
@@ -103,11 +103,11 @@ I will not specify it's constructor here because it is only used by the Commande
 
 **Contents**
 
--   [run](<#run():-void>) - Validate and send run request to the commands executor
--   [setEnabled](<#setEnabled():-void>) - Set the commands enabled status
--   [getEnabled](<#getEnabled():-boolean>) - Get the commands enabled status
--   [getExecutor](<#getExecutor():-CommandExecutor-|-AnonymousCommandExecutor>) - Get the commands executor
--   [getAllowedChannels](<#getAllowedChannels():-string[]>) - Get all the channels the command can run in
+-   [run](#run-void) - Validate and send run request to the commands executor
+-   [setEnabled](#setenabled-void) - Set the commands enabled status
+-   [getEnabled](#getenabled-boolean) - Get the commands enabled status
+-   [getExecutor](#getexecutor-commandexecutor--anonymouscommandexecutor) - Get the commands executor
+-   [getAllowedChannels](#getallowedchannels-string) - Get all the channels the command can run in
 
 ## run(): void
 
