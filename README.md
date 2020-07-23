@@ -1,67 +1,63 @@
-# Commander
+[![Npm Version](https://img.shields.io/npm/v/tmijs-commander.svg?style=flat)](https://www.npmjs.org/package/tmijs-commander)[![Downloads](https://img.shields.io/npm/dm/tmijs-commander.svg?style=flat)](https://www.npmjs.org/package/tmijs-commander)
 
-### TMI.js client command integration simplified.
+## Introduction
 
-# Installation
+Commander is a library to simplify command integration into a [tmi.js](https://github.com/tmijs/tmi.js) client (Twitch Bot).
 
-### **NPM**
+Features:
+
+- Easily register chat commands
+- Parse arguments into an accessible array
+- Handle command execution with a class or function
+- Limit a command to only work in certain channels
+- Disable and enable commands through code
+- Written in Typescript, with type definitions included
+
+## Installation
+
+**NPM**
 
 ```bash
 $ npm i tmijs-commander --save
 ```
 
-### **YARN**
+**YARN**
 
 ```bash
 $ yarn add tmijs-commander
 ```
 
-# Guide
+**Build Yourself (Windows / [Git ](https://git-scm.com/downloads) / [NodeJS](https://nodejs.org/en/download/) )**
 
-This guide will show you how to register the `!debug` command the command executor `DebugCommand`.
-
-## **Initializing a commander**
-
-Import necessary modules
-
-```javascript
-import { Commander, CommandExecutor, CommandOrigins } from 'tmijs-commander';
+```bash
+$ git clone https://github.com/Zyrakia/TMIJS-Commander.git
+$ cd tmijs-commander
+$ npm install
 ```
+## Get Started
+View the quick start guide below, or view the full [docs](https://github.com/Zyrakia/TMIJS-Commander/blob/master/DOCS.md) to get a broader insight on what Commander can do for you.
 
-To begin you must initialize a new Commander and link it with a TMIJS Client. Then you have to register the command after the client connects, with an identifier and an executor.
+## Quick Start
 
-Example with class based executor
+This snippet demonstrate how to register the command `!hello` to your client. I will be using Typescript, because it is what the library is built it, and I highly recommend you do the same.
 
 ```javascript
-//Initialize client and commander
-const client = tmi.client(yourOptions);
-const commander = new Commander(client);
+import tmi from "tmi.js"
+import { Commander, CommandExecutor, CommandOrigins } from "tmijs-commander";
 
-//Connect client and register command
+const options = {YOUR CLIENT OPTIONS HERE};
+const client = tmi.client(options);
+
 client.connect().then(() => {
-	commander.registerCommand('!debug', new DebugCommand());
+    const commander = new Commander(client);
+    commander.registerCommand("!hello", new HelloCommand());
 });
-```
 
-## **Creating the executor**
-
-As you saw above, we registered the `!debug` command to an instance of the the executor `DebugCommand`, but now we must create that executor. An executor can either be an anonymous function, or in this case a class that extends `CommandExecutor`.
-
-A command executor class will have a single required function by the name of `invoke`, this function will be called when the linked command is executed.
-
-The invoke method inside an executor, or the anonymous function, can have the `CommandOrigins` parameter, this will give the method access to all command details, like the channel, author, arguments, and the base client.
-
-This is the `DebugCommand` class we referenced earlier.
-
-```javascript
-class DebugCommand extends CommandExecutor {
-    //This function will be called when !debug is executed
+class HelloCommand extends CommandExecutor {
     public invoke(origins: CommandOrigins) {
-        origins.client.ping().then((ping) => {
-			origins.client.say(origins.channel, `Latency: ${ping[0] * 1000}ms`);
-		});
+        origins.client.say(origins.channel, "Hello World!");
     }
 }
 ```
 
-These couple of lines will implement the debug command into your client so it will be ran when a user types `!debug` in any channel your client has joined.
+When a user now executes the command `!hello` the `invoked` method will be called on the linked executor, which says `Hello World!` in the channel that the command was sent in.
