@@ -8,7 +8,7 @@
 	"license": "MIT",
 	"scripts": {
 		"prepare": "del /S /Q \"./lib/\" && tsc",
-		"link": "npm run prepublish && npm link"
+		"link": "npm run prepare && npm link"
 	},
 	"repository": {
 		"type": "git",
