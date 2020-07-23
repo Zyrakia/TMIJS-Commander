@@ -1,6 +1,6 @@
 import { Client, Userstate } from 'tmi.js';
 import { CommandExecutor, AnonymousCommandExecutor } from '.';
-import { parseOrigins } from './utils/CommandOrigins';
+import { parseOrigins } from './types/CommandOrigins';
 import { Command } from './Command';
 
 export class Commander {
