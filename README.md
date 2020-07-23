@@ -62,4 +62,4 @@ class HelloCommand extends CommandExecutor {
 }
 ```
 
-When a user now executes the command `!hello` the `invoked` method will be called on the linked executor, which says `Hello World!` in the channel that the command was sent in.
+When a user now executes the command `!hello` the `invoke` method will be called on the linked executor, which says `Hello World!` in the channel that the command was sent in.
