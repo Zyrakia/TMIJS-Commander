@@ -1,4 +1,4 @@
-[![Npm Version](https://img.shields.io/npm/v/tmijs-commander.svg?style=flat)](https://www.npmjs.org/package/tmijs-commander)[![Downloads](https://img.shields.io/npm/dm/tmijs-commander.svg?style=flat)](https://www.npmjs.org/package/tmijs-commander)
+[![Npm Version](https://img.shields.io/npm/v/tmijs-commander.svg?style=flat)](https://www.npmjs.org/package/tmijs-commander) [![Downloads](https://img.shields.io/npm/dm/tmijs-commander.svg?style=flat)](https://www.npmjs.org/package/tmijs-commander)
 
 ## Introduction
 
@@ -6,12 +6,12 @@ Commander is a library to simplify command integration into a [tmi.js](https://g
 
 Features:
 
-- Easily register chat commands
-- Parse arguments into an accessible array
-- Handle command execution with a class or function
-- Limit a command to only work in certain channels
-- Disable and enable commands through code
-- Written in Typescript, with type definitions included
+-   Easily register chat commands
+-   Parse arguments into an accessible array
+-   Handle command execution with a class or function
+-   Limit a command to only work in certain channels
+-   Disable and enable commands through code
+-   Written in Typescript, with type definitions included
 
 ## Installation
 
@@ -34,7 +34,9 @@ $ git clone https://github.com/Zyrakia/TMIJS-Commander.git
 $ cd tmijs-commander
 $ npm install
 ```
+
 ## Get Started
+
 View the quick start guide below, or view the full [docs](https://github.com/Zyrakia/TMIJS-Commander/blob/master/DOCS.md) to get a broader insight on what Commander can do for you.
 
 ## Quick Start
