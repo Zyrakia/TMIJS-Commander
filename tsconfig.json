@@ -10,7 +10,19 @@
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
-		//maybe dont need?
 		"downlevelIteration": true
+	},
+	"typedocOptions": {
+		"inputFiles": ["./src/"],
+		"exclude": ["**/Exporter.ts", "**/index.ts*", "**/Command.ts", "**/Logger.ts"],
+		"readme": "none",
+		"mode": "modules",
+		"out": "doc",
+		"theme": "minimal",
+		"name": "Commander",
+		"excludeNotExported": true,
+		"excludePrivate": true,
+		"excludeProtected": true,
+		"excludeExternals": true
 	}
 }
