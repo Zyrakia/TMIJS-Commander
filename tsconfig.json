@@ -17,7 +17,7 @@
 		"exclude": ["**/Exporter.ts", "**/index.ts*", "**/Command.ts", "**/Logger.ts"],
 		"readme": "none",
 		"mode": "modules",
-		"out": "doc",
+		"out": "docs",
 		"theme": "minimal",
 		"name": "Commander",
 		"excludeNotExported": true,
