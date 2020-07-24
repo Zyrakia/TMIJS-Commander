@@ -1,6 +1,6 @@
 {
 	"name": "tmijs-commander",
-	"version": "2.1.2",
+	"version": "2.2.0",
 	"description": "A simple library to easily implement commands into a TMIJS client.",
 	"author": "Zyrakia <mailzyrakia@gmail.com> (https://zyrakia.github.io/)",
 	"main": "lib/index",
