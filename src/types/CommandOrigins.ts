@@ -1,4 +1,4 @@
-import { Userstate, Client } from '../Exporter';
+import { Client, Userstate } from 'tmi.js';
 
 export interface CommandOrigins {
 	identifier: string;
