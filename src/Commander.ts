@@ -5,6 +5,7 @@ import {
 	parseOrigins,
 	CommandExecutor,
 	AnonymousCommandExecutor,
+	Logger,
 } from './Exporter';
 
 export class Commander {
@@ -13,13 +14,20 @@ export class Commander {
 
 	private id: number;
 	private registeredCommands: Map<string, Command> = new Map();
+	private loggingEnabled = false;
+
+	private log: Logger;
 
 	constructor(private client: Client) {
 		this.id = Commander.runningID++;
+		this.log = new Logger(this);
+
 		this.client.addListener('chat', (channel, userstate, message, self) => {
-			this.handleChat(channel, userstate, message, self, this);
+			this.handleChat(channel, userstate, message, self, this, this.log);
 		});
+
 		Commander.registeredCommanders.set(this.id, this);
+		this.log.info('Commander registered.');
 	}
 
 	private handleChat(
@@ -27,13 +35,31 @@ export class Commander {
 		userstate: Userstate,
 		message: string,
 		self: boolean,
-		commander: Commander
+		commander: Commander,
+		log: Logger
 	) {
-		if (self) return;
+		log.info(`Message received from ${userstate.username} in ${channel}`);
+
+		if (self) {
+			log.info(`Message rejected because it came from base client.`);
+			return;
+		}
+
 		const origins = parseOrigins(channel, userstate, message, commander.client);
-		if (!origins) return;
+
+		if (!origins) {
+			log.info(`Message rejected because it did not format into a command correctly.`);
+			return;
+		}
+
 		const command = commander.getCommand(origins.identifier);
-		if (!command) return;
+
+		if (!command) {
+			log.info(`Message was rejected because it is not a registered command.`);
+			return;
+		}
+
+		log.info(`Message parsed to valid command, sending forward.`);
 		command.run(origins);
 	}
 
@@ -42,8 +68,31 @@ export class Commander {
 		executor: CommandExecutor | AnonymousCommandExecutor,
 		allowedChannels: string[] = []
 	) {
-		if (!command || command.includes(' ')) return;
-		this.registeredCommands.set(command, new Command(executor, allowedChannels));
+		if (!command || command.includes(' ')) {
+			this.log.warn(
+				`Command ${command} was not registered because it is empty or includes spaces.`
+			);
+			return;
+		}
+
+		this.registeredCommands.set(
+			command,
+			new Command(command, executor, allowedChannels, this.log)
+		);
+		this.log.info(`Command ${command} successfully registered.`);
+	}
+
+	public enableLogging() {
+		this.loggingEnabled = true;
+		this.log.info(`Logging has been enabled.`);
+	}
+
+	public disableLogging() {
+		this.loggingEnabled = false;
+	}
+
+	public getLogging() {
+		return this.loggingEnabled;
 	}
 
 	public getID() {
