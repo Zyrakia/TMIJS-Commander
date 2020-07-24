@@ -37,7 +37,7 @@ $ npm install
 
 ## Get Started
 
-View the quick start guide below, or view the full [docs](https://github.com/Zyrakia/TMIJS-Commander/blob/master/DOCS.md) to get a broader insight on what Commander can do for you.
+View the quick start guide below, or view the full [docs](https://github.com/Zyrakia/TMIJS-Commander/blob/master/DOCS.md) (coming soon) to get a broader insight on what Commander can do for you.
 
 ## Quick Start
 
