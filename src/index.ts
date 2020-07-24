@@ -1,4 +1,2 @@
-//Expose necessary modules
-export { Commander } from './Commander';
-export { CommandOrigins } from './types/CommandOrigins';
-export { CommandExecutor, AnonymousCommandExecutor } from './types/CommandExecutor';
+//Expose necessary modules to a person developing with this package
+export { Commander, CommandExecutor, AnonymousCommandExecutor, CommandOrigins } from './Exporter';

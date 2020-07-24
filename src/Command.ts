@@ -1,5 +1,4 @@
-import { CommandExecutor, AnonymousCommandExecutor } from '.';
-import { CommandOrigins } from '.';
+import { CommandExecutor, AnonymousCommandExecutor, CommandOrigins } from './Exporter';
 
 export class Command {
 	private enabled = true;

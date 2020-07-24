@@ -1,7 +1,11 @@
-import { Client, Userstate } from 'tmi.js';
-import { CommandExecutor, AnonymousCommandExecutor } from '.';
-import { parseOrigins } from './types/CommandOrigins';
-import { Command } from './Command';
+import {
+	Client,
+	Userstate,
+	Command,
+	parseOrigins,
+	CommandExecutor,
+	AnonymousCommandExecutor,
+} from './Exporter';
 
 export class Commander {
 	private static runningID = 0;
