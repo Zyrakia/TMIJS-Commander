@@ -24,10 +24,9 @@ export class Command {
 				return;
 			}
 
+		this.log.info(`Command ${origins.identifier} successfully sent to executor.`);
 		if (this.executor instanceof CommandExecutor) this.executor.invoke(origins);
 		else this.executor(origins);
-
-		this.log.info(`Command ${origins.identifier} successfully sent to executor.`);
 	}
 
 	public enable() {
