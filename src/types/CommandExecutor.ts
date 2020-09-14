@@ -5,5 +5,5 @@ export abstract class CommandExecutor {
 }
 
 export interface AnonymousCommandExecutor {
-	async (origins: CommandOrigins): Promise<void>;
+	(origins: CommandOrigins): Promise<void>;
 }
