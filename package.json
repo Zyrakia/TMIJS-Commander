@@ -30,7 +30,8 @@
 	},
 	"homepage": "https://github.com/Zyrakia/TMIJS-Command-Manager#readme",
 	"dependencies": {
-		"@types/tmi.js": "^1.4.0"
+		"@types/tmi.js": "^1.4.2",
+		"tmi.js": "^1.5.0"
 	},
 	"devDependencies": {
 		"typescript": "^3.9.7"
