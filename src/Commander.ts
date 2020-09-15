@@ -47,7 +47,7 @@ export class Commander {
 		const origins = parseOrigins(channel, userstate, message, commander.client);
 
 		if (!origins) {
-			log.info(`Message rejected because it did not format into a command correctly.`);
+			log.info(`Message rejected because it did not format correctly.`);
 			return;
 		}
 
